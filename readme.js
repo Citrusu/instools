@@ -4,8 +4,8 @@ var data = {
             "edge_owner_to_timeline_media": {
                 "count": 410, //总帖量
                 "page_info": {
-                    "has_next_page": false,
-                    "end_cursor": "AQD3o9tkdelLDmo6zTCG4u5ltPG1UhgynuVp7t_EbxKX1HhBoIITIinvPv8TQ4gCoe8"
+                    "has_next_page": false,//是否有下一页
+                    "end_cursor": "AQD3o9tkdelLDmo6zTCG4u5ltPG1UhgynuVp7t_EbxKX1HhBoIITIinvPv8TQ4gCoe8" //请求下一页的标识，"after":
                 },
                 "edges": [
                     {
