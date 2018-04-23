@@ -1,0 +1,23 @@
+{
+  "name": "instools",
+  "version": "1.0.0",
+  "description": "## 获取主页地址",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Citrusu/instools.git"
+  },
+  "author": "citrus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Citrusu/instools/issues"
+  },
+  "homepage": "https://github.com/Citrusu/instools#readme",
+  "dependencies": {
+    "superagent": "^3.8.2",
+    "superagent-proxy": "^1.0.3"
+  }
+}
