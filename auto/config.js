@@ -1,8 +1,44 @@
 //收集的用户列表
 const collectList = [
+    // {
+    //     userid: '45290591',
+    //     username: 'maria_domark'
+    // },
     {
-        userid: '45290591',
-        username: 'maria_domark'
+        userid: '814273802',
+        username: 'mavrinland'
+    },
+    {
+        userid: '1524747082',
+        username: 'alexisren'
+    },
+    {
+        userid: '2073848940',
+        username: 'stayinthesun'
+    },
+    {
+        userid: '2142081715',
+        username: 'fox_model_israel'
+    },
+    {
+        userid: '4517059',
+        username: 'yuiiwadee'
+    },
+    {
+        userid: '609915005',
+        username: 'sakura_nuii'
+    },
+    {
+        userid: '1724424',
+        username: 'auauau'
+    },
+    {
+        userid: '629028990',
+        username: 'celineschh'
+    },
+    {
+        userid: '1095764373',
+        username: 'mavrinstudios'
     }
 ];
 
