@@ -2,7 +2,7 @@
 const fs = require('fs');
 const Tools = function (){};
 
-tools.prototype = {
+Tools.prototype = {
     /**
     * 保存文件
     */
