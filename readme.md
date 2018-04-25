@@ -4,7 +4,9 @@
 
 主页地址：https://www.instagram.com/nasa/
 
+
 ## 获取用户 id 
+`data.user.reel.id`
 
 ## 获取总帖子数量
 
@@ -24,7 +26,7 @@ https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={"
 
 -   `query_id` 自己的账户 id
 -   `variables` 查询的参数
--   `variables.id` 用户 id
+-   `variables.id` 要查询的用户 id
 -   `variables.first` 要查询的数量，之前获取的帖子总数
 
 接口返回信息见 readme.js
