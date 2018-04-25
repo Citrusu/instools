@@ -38,7 +38,7 @@ let getByProxy = function(src, func){
     }
 }
 
-let getRes = async function(queryVar){
+let getRes = async function(queryVar, otherParam){
     let src = requestUrl + tools.getVariables(queryVar);
     console.log(src)
     let param = await getByProxy(src);
@@ -52,33 +52,41 @@ let getRes = async function(queryVar){
         let shortCode = n.node.shortcode; // 文章短名，可拼上获得文章详情地址
         let imgRealUrl = n.node.display_url; // 图片地址
         let suffix = imgRealUrl.split('.').pop(); //文件后缀
-        let downSrc = dist + shortCode + '.' + suffix;
+        let downSrc = otherParam.dir + shortCode + '.' + suffix;
 
         //console.log(`下载：${n.node.display_url}`);
         if(fs.existsSync(downSrc)){
-            console.log(`已存在 ${downSrc}`);
+            // console.log(`已存在 ${downSrc}`);
             return false;
         }
-        setTimeout(async () => {
+        // setTimeout(async () => {
             let file = await getByProxy(imgRealUrl);
             tools.saveFile(downSrc, file);
-        }, 1000)
+        // }, 1000)
         
     });
 
     //是否有下一页
     if(nextPage.has_next_page && nextPage.has_next_page != 'false'){
-        setTimeout(() => {
+        // setTimeout(() => {
             getRes({
                 id: queryVar.id, 
                 first: config.pageNum, 
                 after: nextPage.end_cursor
-            })
-        }, 1000 * 10);
+            }, otherParam)
+        // }, 1000 * 10);
     }
 }
 
 
 collectList.forEach((n, i) => {
-    getRes({id: n.userid, first: config.pageNum});
+    //检查目录是否存在，不存在则创建
+    let dir = `${dist}${n.username}/`
+    if(!fs.existsSync(dir)){
+        fs.mkdirSync(dir, () => {
+            console.log(`创建目录 ${dir}`);
+        });
+
+    }
+    getRes({id: n.userid, first: config.pageNum}, {dir: dir});
 })
