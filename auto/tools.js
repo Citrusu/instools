@@ -1,12 +1,15 @@
 //工具方法
 const fs = require('fs');
-const Tools = function (){};
+const Tools = function (){
+    this.downloadCount = 0;
+};
 
 Tools.prototype = {
     /**
     * 保存文件
     */
     saveFile: function(dist, fileData){
+        let that = this;
         if(fs.existsSync(dist)){
             console.log(`已存在: ${dist}`);
             return false;
@@ -15,8 +18,8 @@ Tools.prototype = {
             if(err){
                 return console.log(err);
             }
-    
-            console.log(`已保存文件: ${dist}`);
+            that.downloadCount += 1;
+            console.log(`已保存文件: ${dist},当前下载:${that.downloadCount}`);
         });
     },
     /**
