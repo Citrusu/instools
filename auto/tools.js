@@ -37,14 +37,15 @@ Tools.prototype = {
         return Math.round(Math.random()*(b-a)+a);
     },
     log: function(text){
-        let preTxt = `当前错误：${this.logNum + 1}\n`;
-        fs.appendFile(config.logDist, `${preTxt}${text}\n`, 'utf8', (err)=>{
+        let that = this;
+        this.logNum += 1;
+        let pre = `当前错误：${that.logNum} - ${new Date()}\n`;
+        fs.appendFile(config.logDist, `${pre}${text}\n`, 'utf8', (err)=>{
             if(err){
                 console.log(err);
                 return;
             }
-            this.logNum += 1;
-            console.log(`已记录错误：${this.logNum}`);
+            console.log(`已记录错误：${that.logNum}`);
         })
     }
 };
