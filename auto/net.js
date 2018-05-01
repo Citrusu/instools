@@ -25,7 +25,7 @@ class Net{
                 if (err) {
                     tools.log(`${err}\n${src}`);
                     // return reject(err);
-                    if(errBack && err.status != '404'){errBack()};
+                    if(errBack){errBack(err)};
                 } else {
                     resolve(res.body);
                 }

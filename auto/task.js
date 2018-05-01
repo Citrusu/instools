@@ -39,13 +39,15 @@ class Task{
                 let nowTask = that.taskFuncs.splice(i, 1)[0];
                 that.taskCount += 1;
                 //将当前方法抽出，如果失败则重新加入列队
-                nowTask(() => {
+                nowTask((err) => {
                     // tools.log(`reTask`)
                     if(that.taskCount > 0){
                         that.taskCount -= 1;
                     }
+                    if(err.status != '404'){
+                        that.taskFuncs.push(nowTask);
+                    }
                     
-                    that.taskFuncs.push(nowTask);
                 });
             }else{
                 break;
