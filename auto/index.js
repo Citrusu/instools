@@ -96,11 +96,6 @@ function downList(index){
         getRes({id: n.userid, first: config.pageNum}, {dir: dir, user: n.username}, errBack);
     })
     
-    // task.taskFuncs.push(async (errBack) => {
-    //     task.taskCount -= 1;
-    //     getRes('https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"1095764373","first":12,"after":"AQDV2o1mc-ETP-SnkifKOUUIoou2MuI_F1vynEQj_4oWlFk8C5Wl7zF1fso7vxbsugWCv-F5vtz8XlLinbq5nlIWYsWoRWXLZD_0aH67hXnYuQ"}', {dir: dir, user: n.username}, errBack);
-    // })
-    
 }
 downList();
 task.init();
