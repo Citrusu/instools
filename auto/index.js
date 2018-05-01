@@ -1,22 +1,20 @@
-const netFunc = require('./net');
-const net = new netFunc();
-
-const toolsFunc = require('./tools');
-const tools = new toolsFunc();
-
 const config = require('./config');
 const fs = require('fs');
 const dist = config.dist; //输出目录
 const collectList = config.collectList;
 const requestUrl = config.requestUrl;
 
+const NetFunc = require('./net');
+const net = new NetFunc();
+
+const ToolsFunc = require('./tools');
+const tools = new ToolsFunc();
+
+const TaskFunc = require('./task');
+let task = new TaskFunc();
+
 let downIdx = 0;
-let listDone = false;
-const asyncMax = config.asyncMax;
-let asyncCount = 0;
-let downLoadFuncs = [];
-let downTimer = null;
-let errCount = 0;
+
 console.log('开始获取');
 
 let getRes = async function(queryVar, otherParam, errBack){
@@ -46,19 +44,19 @@ let getRes = async function(queryVar, otherParam, errBack){
             // console.log(`下载：${imgRealUrl}`);
             let file = await net.getByProxy(imgRealUrl, errBack);
             tools.saveFile(downSrc, file, () => {
-                asyncCount -= 1;
+                task.asyncCount -= 1;
             });
             
         }
-        downLoadFuncs.push(fileFunc);
+        task.taskFuncs.push(fileFunc);
         
     });
-    console.log(`获取列表成功，当前任务数：${downLoadFuncs.length}`);
+    console.log(`获取列表成功，当前任务数：${task.taskFuncs.length}`);
     
     //是否有下一页
     if(nextPage.has_next_page && nextPage.has_next_page != 'false'){
-        downLoadFuncs.push(async (errBack) => {
-            asyncCount -= 1;
+        task.taskFuncs.push(async (errBack) => {
+            task.taskCount -= 1;
             getRes({
                 id: queryVar.id, 
                 first: config.pageNum, 
@@ -73,48 +71,12 @@ let getRes = async function(queryVar, otherParam, errBack){
     }
 }
 
-// 执行列队
-function startDownFuncs(){
-    for(var i = 0; i < downLoadFuncs.length; i++){
-        if(asyncCount < asyncMax){
-            let nowTask = downLoadFuncs.splice(i, 1)[0];
-            asyncCount += 1;
-            //将当前方法抽出，如果失败则重新加入列队
-            nowTask(() => {
-                // tools.log(`reTask`)
-                if(asyncCount >= 0){
-                    asyncCount -= 1;
-                }
-                
-                downLoadFuncs.push(nowTask);
-            });
-        }else{
-            break;
-        }
-    }
-    console.log(`当前任务：${downLoadFuncs.length}，并发数：${asyncCount}`);
-}
-downTimer = setInterval(() => {
-    if(listDone && downLoadFuncs.length <= 0){
-        console.log('所有任务已经完成');
-        clearInterval(downTimer);
-        return;
-    }
-    var delayTime = tools.getRandom(10 * 1000, 35 * 1000);
-    // if(downLoadFuncs.length < asyncMax){
-    //     delayTime = tools.getRandom(2 * 1000, 5 * 1000);
-    // }
-    setTimeout(() => {
-        startDownFuncs();
-    }, delayTime);
-    
-}, 3000);
 
 function downList(index){
     let idx = index || 0;
     let n = collectList[idx];
     if(!n){
-        listDone = true;
+        task.listDone = true;
         return false;
     }
     //检查目录是否存在，不存在则创建
@@ -126,7 +88,11 @@ function downList(index){
         });
 
     }
-    getRes({id: n.userid, first: config.pageNum}, {dir: dir, user: n.username});
+    task.taskFuncs.push(async (errBack) => {
+        task.taskCount -= 1;
+        getRes({id: n.userid, first: config.pageNum}, {dir: dir, user: n.username}, errBack);
+    })
+    
 }
 downList();
-
+task.init();
