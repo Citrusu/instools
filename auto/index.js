@@ -19,7 +19,9 @@ console.log('开始获取');
 
 let getRes = async function(queryVar, otherParam, errBack){
     let src = requestUrl + tools.getVariables(queryVar);
-    // console.log(src)
+    if(typeof queryVar == 'string'){
+        src = queryVar;
+    }
     let param = await net.getByProxy(src, errBack);
     let media = param.data.user.edge_owner_to_timeline_media;
     let totalCount = media.count;//总页数
@@ -44,7 +46,7 @@ let getRes = async function(queryVar, otherParam, errBack){
             // console.log(`下载：${imgRealUrl}`);
             let file = await net.getByProxy(imgRealUrl, errBack);
             tools.saveFile(downSrc, file, () => {
-                task.asyncCount -= 1;
+                task.taskCount -= 1;
             });
             
         }
@@ -52,6 +54,7 @@ let getRes = async function(queryVar, otherParam, errBack){
         
     });
     console.log(`获取列表成功，当前任务数：${task.taskFuncs.length}`);
+    console.log(src);
     
     //是否有下一页
     if(nextPage.has_next_page && nextPage.has_next_page != 'false'){
@@ -92,6 +95,11 @@ function downList(index){
         task.taskCount -= 1;
         getRes({id: n.userid, first: config.pageNum}, {dir: dir, user: n.username}, errBack);
     })
+    
+    // task.taskFuncs.push(async (errBack) => {
+    //     task.taskCount -= 1;
+    //     getRes('https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"1095764373","first":12,"after":"AQDV2o1mc-ETP-SnkifKOUUIoou2MuI_F1vynEQj_4oWlFk8C5Wl7zF1fso7vxbsugWCv-F5vtz8XlLinbq5nlIWYsWoRWXLZD_0aH67hXnYuQ"}', {dir: dir, user: n.username}, errBack);
+    // })
     
 }
 downList();
