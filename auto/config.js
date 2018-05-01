@@ -4,18 +4,18 @@ const collectList = [
     //     userid: '45290591',
     //     username: 'maria_domark'
     // },
-    {
-        userid: '814273802',
-        username: 'mavrinland'
-    },
-    {
-        userid: '1524747082',
-        username: 'alexisren'
-    },
-    {
-        userid: '2073848940',
-        username: 'stayinthesun'
-    },
+    // {
+    //     userid: '814273802',
+    //     username: 'mavrinland'
+    // },
+    // {
+    //     userid: '1524747082',
+    //     username: 'alexisren'
+    // },
+    // {
+    //     userid: '2073848940',
+    //     username: 'stayinthesun'
+    // },
     {
         userid: '2142081715',
         username: 'fox_model_israel'
@@ -54,7 +54,7 @@ const reqHeader = {
     'X-Requested-With': 'XMLHttpRequest'
 }
 
-let cookie = 'csrftoken=NOU5FhFSqv53rIoBWEdg19JayG1yv3Lu; shbid=7933; ds_user_id=1424909330; sessionid=IGSC784213ecf9dd1e35de5f57de4657b1e6477279f05977d2fb69820efb560a6707:q6d26LTnpXAisZ69HKArWEjPsL3Pm4Ar:{"_auth_user_id":1424909330,"_auth_user_backend":"accounts.backends.CaseInsensitiveModelBackend","_auth_user_hash":"","_platform":4,"_token_ver":2,"_token":"1424909330:irK9dwZqOEHVtCT2LHd5ontUF2ima0GN:380a6be291763f64a2aaf866e9563b8d3421314147d38d783b49eb61615b6f9e","last_refreshed":1524119698.9382300377}; mid=Wtg3zAAEAAGHpn57nED-0esin2GQ; ig_pr=2; ig_vh=984; ig_or=landscape-primary; mcd=3; rur=FTW; ig_vw=1920; urlgen="{\"time\": 1524119511\054 \"67.209.184.179\": 25820}:1f9Mpy:68of2DhqCEKJ5aYUd2np-3e8Fck"';
+let cookie = 'csrftoken=NOU5FhFSqv53rIoBWEdg19JayG1yv3Lu; ds_user_id=1424909330; shbid=7933; mid=Wt1qTwAEAAGYfR0jgiCguLenJSyF; mcd=3; rur=FTW; sessionid=1424909330%3AirK9dwZqOEHVtC%3A2; urlgen="{\"time\": 1524631842\054 \"67.209.184.179\": 25820}:1fBK1O:ELnyrKMGLJRdYZaS4H4R1PFPmxU"';
 
 //export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
 
@@ -64,12 +64,15 @@ let proxy = 'http://127.0.0.1:1087';
 const config = {
     collectList: collectList,
     dist: './dist/',//基础路径
+    logDist: './log/log.text',
     requestUrl: 'https://www.instagram.com/graphql/query/?query_id=17888483320059182',
-    pageNum: 50, //每页数量
+    pageNum: 12, //每页数量
     requestId: '1424909330',//查询的账户id
     cookie: cookie,
     reqHeader: reqHeader,
-    proxy: proxy
+    proxy: proxy,
+    asyncMax: 12,
+    writeMax: 50
 };
 
 module.exports = config;
