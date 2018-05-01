@@ -23,7 +23,7 @@ class Net{
     
             function onresponse (err, res) {
                 if (err) {
-                    tools.log(`${err}\n${src}`);
+                    tools.log(`${err}\n${src}\n${err['status']}`);
                     // return reject(err);
                     if(errBack){errBack(err)};
                 } else {
