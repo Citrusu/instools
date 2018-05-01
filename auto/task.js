@@ -19,6 +19,7 @@ class Task{
             if(that.listDone && that.taskFuncs.length <= 0){
                 console.log('所有任务已经完成');
                 that.endTask();
+                process.exit();
                 return;
             }
             let delayTime = tools.getRandom(10 * 1000, 35 * 1000);
@@ -44,7 +45,7 @@ class Task{
                     if(that.taskCount > 0){
                         that.taskCount -= 1;
                     }
-                    if(err.status != '404'){
+                    if(err.status != '404' && err.status != '400'){
                         that.taskFuncs.push(nowTask);
                     }
                     
