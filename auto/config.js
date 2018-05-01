@@ -1,21 +1,21 @@
 //收集的用户列表
 const collectList = [
-    // {
-    //     userid: '45290591',
-    //     username: 'maria_domark'
-    // },
-    // {
-    //     userid: '814273802',
-    //     username: 'mavrinland'
-    // },
-    // {
-    //     userid: '1524747082',
-    //     username: 'alexisren'
-    // },
-    // {
-    //     userid: '2073848940',
-    //     username: 'stayinthesun'
-    // },
+    {
+        userid: '45290591',
+        username: 'maria_domark'
+    },
+    {
+        userid: '814273802',
+        username: 'mavrinland'
+    },
+    {
+        userid: '1524747082',
+        username: 'alexisren'
+    },
+    {
+        userid: '2073848940',
+        username: 'stayinthesun'
+    },
     {
         userid: '2142081715',
         username: 'fox_model_israel'
@@ -71,7 +71,7 @@ const config = {
     cookie: cookie,
     reqHeader: reqHeader,
     proxy: proxy,
-    asyncMax: 12,
+    taskMax: 12,
     writeMax: 50
 };
 
