@@ -9,7 +9,7 @@ const collectList = [
         username: 'mavrinland'
     },
     {
-        userid: '1524747082',
+        userid: '28656806',
         username: 'alexisren'
     },
     {
@@ -39,6 +39,10 @@ const collectList = [
     {
         userid: '1095764373',
         username: 'mavrinstudios'
+    },
+    {
+        userid: '2203549042',
+        username: 'smile_seonhui'
     }
 ];
 
@@ -54,7 +58,7 @@ const reqHeader = {
     'X-Requested-With': 'XMLHttpRequest'
 }
 
-let cookie = 'csrftoken=NOU5FhFSqv53rIoBWEdg19JayG1yv3Lu; ds_user_id=1424909330; shbid=7933; mid=Wt1qTwAEAAGYfR0jgiCguLenJSyF; mcd=3; rur=FTW; sessionid=1424909330%3AirK9dwZqOEHVtC%3A2; urlgen="{\"time\": 1524631842\054 \"67.209.184.179\": 25820}:1fBK1O:ELnyrKMGLJRdYZaS4H4R1PFPmxU"';
+let cookie = 'csrftoken=NOU5FhFSqv53rIoBWEdg19JayG1yv3Lu; ds_user_id=1424909330; shbid=7933; mid=Wt1qTwAEAAGYfR0jgiCguLenJSyF; rur=FTW; mcd=3;sessionid=IGSCd7633938de9af2b141503ea1734c56eed1695f4815241dc3eb003b6c0b3af361%3AOA2cOIBFeqzOgr1XE4A2bLl9DeRrGFum%3A%7B%22_auth_user_id%22%3A1424909330%2C%22_auth_user_backend%22%3A%22accounts.backends.CaseInsensitiveModelBackend%22%2C%22_token%22%3A%221424909330%3AdCUSwo7s29u6SZY08JfSRvdACkayTD8W%3A6e1c535d1df119c1ae78b816b497225f4a54cf1bed5f6ddea3b2d489a26b6957%22%2C%22_platform%22%3A4%2C%22_remote_ip%22%3A%2267.209.184.179%22%2C%22_mid%22%3A%22Wt1qTwAEAAGYfR0jgiCguLenJSyF%22%2C%22_user_agent_md5%22%3A%228cbcc8c29147223f61dce1198d00ef94%22%2C%22_token_ver%22%3A2%2C%22last_refreshed%22%3A1525184942.0038893223%7D; urlgen="{\"time\": 1525184941\054 \"67.209.184.179\": 25820}:1fDXUr:ZZOesuAJXLtAeKPJT4PuAeQmv2E"';
 
 //export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
 
