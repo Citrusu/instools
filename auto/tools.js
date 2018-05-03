@@ -39,7 +39,7 @@ Tools.prototype = {
     log: function(text){
         let that = this;
         this.logNum += 1;
-        let pre = `当前错误：${that.logNum} - ${new Date()}\n`;
+        let pre = `>>> 当前错误：${that.logNum} - ${new Date()}\n`;
         fs.appendFile(config.logDist, `${pre}${text}\n`, 'utf8', (err)=>{
             if(err){
                 console.log(err);
