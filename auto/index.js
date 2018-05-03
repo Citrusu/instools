@@ -27,8 +27,9 @@ let getRes = async function(queryVar, otherParam, errBack){
     let totalCount = media.count;//总页数
     let list = media.edges;//分页信息
     let nextPage = media.page_info;
+    let breakList = false;
 
-    list.forEach(async (n, i) => {
+    for(let n of list){
         let shortCode = n.node.shortcode; // 文章短名，可拼上获得文章详情地址
         let imgRealUrl = n.node.display_url; // 图片地址
         let suffix = imgRealUrl.split('.').pop(); //文件后缀
@@ -37,9 +38,10 @@ let getRes = async function(queryVar, otherParam, errBack){
         //console.log(`下载：${n.node.display_url}`);
         if(fs.existsSync(downSrc)){
             // console.log(`已存在 ${downSrc}`);
-            // downIdx += 1;
-            // downList(downIdx);
-            return false;
+            downIdx += 1;
+            downList(downIdx);
+            breakList = true;
+            break;
         }
 
         let fileFunc = async (errBack) => {
@@ -52,12 +54,12 @@ let getRes = async function(queryVar, otherParam, errBack){
         }
         task.taskFuncs.push(fileFunc);
         
-    });
-    console.log(`获取列表成功，当前任务数：${task.taskFuncs.length}`);
-    console.log(src);
+    };
+    console.log(`获取列表成功，当前:${otherParam.user}任务数:${task.taskFuncs.length}`);
+    // console.log(src);
     
     //是否有下一页
-    if(nextPage.has_next_page && nextPage.has_next_page != 'false'){
+    if(!breakList && nextPage.has_next_page && nextPage.has_next_page != 'false'){
         task.taskFuncs.push(async (errBack) => {
             task.taskCount -= 1;
             getRes({
@@ -73,7 +75,6 @@ let getRes = async function(queryVar, otherParam, errBack){
         downList(downIdx);
     }
 }
-
 
 function downList(index){
     let idx = index || 0;
