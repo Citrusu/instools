@@ -56,7 +56,6 @@ let getRes = async function(queryVar, otherParam, errBack){
         
     };
     console.log(`获取列表成功，当前:${otherParam.user}任务数:${task.taskFuncs.length}`);
-    // console.log(src);
     
     //是否有下一页
     if(!breakList && nextPage.has_next_page && nextPage.has_next_page != 'false'){
@@ -68,7 +67,6 @@ let getRes = async function(queryVar, otherParam, errBack){
                 after: nextPage.end_cursor
             }, otherParam, errBack)
         })
-    
     }else{
         console.log(`${otherParam.user}已经下载完成, 总数：${totalCount}`);
         downIdx += 1;
