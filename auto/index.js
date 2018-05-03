@@ -38,8 +38,6 @@ let getRes = async function(queryVar, otherParam, errBack){
         //console.log(`下载：${n.node.display_url}`);
         if(fs.existsSync(downSrc)){
             // console.log(`已存在 ${downSrc}`);
-            downIdx += 1;
-            downList(downIdx);
             breakList = true;
             break;
         }
@@ -55,7 +53,7 @@ let getRes = async function(queryVar, otherParam, errBack){
         task.taskFuncs.push(fileFunc);
         
     };
-    console.log(`获取列表成功，当前:${otherParam.user}任务数:${task.taskFuncs.length}`);
+    console.log(`获取列表成功，当前:${otherParam.user},任务数:${task.taskFuncs.length}`);
     
     //是否有下一页
     if(!breakList && nextPage.has_next_page && nextPage.has_next_page != 'false'){
