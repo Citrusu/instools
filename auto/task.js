@@ -7,6 +7,8 @@ const fs = require('fs');
 
 class Task{
     constructor(){
+        this.startTime = new Date();
+        this.endTime = 0;
         this.taskFuncs = [];
         this.taskCount = 0;
         this.taskTimer = null;
@@ -19,6 +21,7 @@ class Task{
             if(that.listDone && that.taskFuncs.length <= 0){
                 console.log('所有任务已经完成');
                 that.endTask();
+                tools.record();
                 process.exit();
                 return;
             }
@@ -41,7 +44,7 @@ class Task{
                 that.taskCount += 1;
                 //将当前方法抽出，如果失败则重新加入列队
                 nowTask((err) => {
-                    // tools.log(`reTask`)
+                    // tools.err(`reTask`)
                     if(that.taskCount > 0){
                         that.taskCount -= 1;
                     }
