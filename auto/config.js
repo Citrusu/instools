@@ -67,8 +67,9 @@ let proxy = 'http://127.0.0.1:1087';
 
 const config = {
     collectList: collectList,
-    dist: './dist/',//基础路径
-    logDist: './log/log.text',
+    //dist: './dist/',//基础路径
+    dist: '/Users/citrus/Pictures/insdownload/',//基础路径
+    logDist: './log/',
     requestUrl: 'https://www.instagram.com/graphql/query/?query_id=17888483320059182',
     pageNum: 12, //每页数量
     requestId: '1424909330',//查询的账户id
