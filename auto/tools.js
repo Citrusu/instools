@@ -3,7 +3,7 @@ const fs = require('fs');
 const config = require('./config');
 const Tools = function (){
     this.downloadCount = 0;
-    this.logNum = 0;
+    this.errNum = 0;
 };
 
 Tools.prototype = {
@@ -36,16 +36,36 @@ Tools.prototype = {
     getRandom: function (a , b){
         return Math.round(Math.random()*(b-a)+a);
     },
-    log: function(text){
+    record: function(text){
         let that = this;
-        this.logNum += 1;
-        let pre = `>>> 当前错误：${that.logNum} - ${new Date()}\n`;
-        fs.appendFile(config.logDist, `${pre}${text}\n`, 'utf8', (err)=>{
+        let pre = `>>> ${new Date()}\n`;
+        let fileData = text || `本次总下载：${that.downloadCount}`;
+        let suf = `\n==========================\n`;
+        that.appendFile(`${config.logDist}record.text`, `${pre}${fileData}${suf}`, (err) => {
+            return;
+        });
+        console.log(fileData);
+    },
+    log: function(text){
+        this.appendFile(`${config.logDist}log.text`, `${text}\n`, (err) => {
+            return;
+        });
+    },
+    err: function(text){
+        let that = this;
+        that.errNum += 1;
+        let pre = `>>> 当前错误：${that.errNum} - ${new Date()}\n`;
+        that.appendFile(`${config.logDist}err.text`, `${pre}${text}\n`, (err) => {
+            return;
+        });
+        console.log(`已记录错误：${that.errNum}`);
+    },
+    appendFile: function(dist, fileData, func){
+        fs.appendFile(dist, fileData, 'utf8', (err)=>{
             if(err){
                 console.log(err);
-                return;
+                if(func){func(err)};
             }
-            console.log(`已记录错误：${that.logNum}`);
         })
     }
 };
