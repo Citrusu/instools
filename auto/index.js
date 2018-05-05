@@ -38,6 +38,7 @@ let getRes = async function(queryVar, otherParam, errBack){
         //console.log(`下载：${n.node.display_url}`);
         if(fs.existsSync(downSrc)){
             // console.log(`已存在 ${downSrc}`);
+            // continue;
             breakList = true;
             break;
         }
