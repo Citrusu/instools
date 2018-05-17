@@ -1,12 +1,12 @@
 const config = require('./config');
 
-const toolsFunc = require('./tools');
-const tools = new toolsFunc();
+let tools = null;
 
 const fs = require('fs');
 
 class Task {
-    constructor() {
+    constructor(tool) {
+        tools = tool;
         this.startTime = new Date();
         this.endTime = 0;
         this.taskFuncs = [];
@@ -20,7 +20,7 @@ class Task {
         that.taskTimer = setInterval(() => {
             if (that.listDone && that.taskFuncs.length <= 0) {
                 that.endTask();
-                tools.record(() => {
+                tools.record(null, () => {
                     console.log('所有任务已经完成');
                     process.exit();
                 });

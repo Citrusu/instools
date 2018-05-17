@@ -36,9 +36,10 @@ Tools.prototype = {
     getRandom: function(a, b) {
         return Math.round(Math.random() * (b - a) + a);
     },
+    //任务记录
     record: function(text, func) {
         let that = this;
-        let pre = `>>> ${new Date()}\n`;
+        let pre = `>>> ${that.formatTime()}\n`;
         let fileData = text || `本次总下载：${that.downloadCount}`;
         let suf = `\n==========================\n`;
         that.appendFile(`${config.logDist}record.text`, `${pre}${fileData}${suf}`, (err) => {
@@ -61,12 +62,13 @@ Tools.prototype = {
     err: function(text) {
         let that = this;
         that.errNum += 1;
-        let pre = `>>> 当前错误：${that.errNum} - ${new Date()}\n`;
+        let pre = `>>> 当前错误：${that.errNum} - ${that.formatTime()}\n`;
         that.appendFile(`${config.logDist}err.text`, `${pre}${text}\n`, (err) => {
             return;
         });
         console.log(`已记录错误：${that.errNum}`);
     },
+    //文件内容写入追加
     appendFile: function(dist, fileData, func) {
         fs.appendFile(dist, fileData, 'utf8', (err) => {
             if (err) {
@@ -74,6 +76,22 @@ Tools.prototype = {
                 if (func) { func(err) };
             }
         })
+    },
+    //格式化时间
+    formatTime() {
+        var nowTime = new Date();
+        var Y = nowTime.getFullYear().toString();
+        var M = litter(nowTime.getMonth() + 1);
+        var D = litter(nowTime.getDate());
+        var H = litter(nowTime.getHours());
+        var Min = litter(nowTime.getMinutes());
+        var S = litter(nowTime.getSeconds());
+
+        function litter(v) {
+            return v >= 10 ? v.toString() : '0' + v.toString();
+        }
+        var now = `${Y}-${M}-${D} ${H}:${Min}:${S}`;
+        return now;
     }
 };
 

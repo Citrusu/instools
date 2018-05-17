@@ -1,5 +1,4 @@
-const toolsFunc = require('./tools');
-const tools = new toolsFunc();
+let tools = null;
 
 const request = require('superagent');
 // extend with Request#proxy()
@@ -8,10 +7,10 @@ require('superagent-proxy')(request);
 const config = require('./config');
 
 class Net {
-    constructor() {
-
-        }
-        //let src = 'https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"45290591","first":50}';
+    constructor(tool) {
+        tools = tool;
+    }
+    //let src = 'https://www.instagram.com/graphql/query/?query_id=17888483320059182&variables={"id":"45290591","first":50}';
     getByProxy(src, errBack) {
         return new Promise((resolve, reject) => {
             request
@@ -25,7 +24,9 @@ class Net {
                 if (err) {
                     tools.err(`${err}\n${src}\n${err['status']}`);
                     // return reject(err);
-                    if (errBack) { errBack(err) };
+                    if (errBack) {
+                        errBack(err)
+                    };
                 } else {
                     resolve(res.body);
                 }
