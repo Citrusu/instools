@@ -16,7 +16,7 @@ let task = new TaskFunc(tools);
 let downIdx = 0;
 
 console.log('开始获取');
-
+tools.startTime = tools.formatTime();
 let getRes = async function(queryVar, otherParam, errBack) {
     let src = requestUrl + tools.getVariables(queryVar);
     if (typeof queryVar == 'string') {

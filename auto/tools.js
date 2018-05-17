@@ -2,6 +2,7 @@
 const fs = require('fs');
 const config = require('./config');
 const Tools = function() {
+    this.startTime = null;
     this.downloadCount = 0;
     this.errNum = 0;
 };
@@ -39,7 +40,7 @@ Tools.prototype = {
     //任务记录
     record: function(text, func) {
         let that = this;
-        let pre = `>>> ${that.formatTime()}\n`;
+        let pre = `>>> ${that.startTime} -- ${that.formatTime()}\n`;
         let fileData = text || `本次总下载：${that.downloadCount}`;
         let suf = `\n==========================\n`;
         that.appendFile(`${config.logDist}record.text`, `${pre}${fileData}${suf}`, (err) => {
