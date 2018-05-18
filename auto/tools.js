@@ -42,7 +42,7 @@ Tools.prototype = {
         let that = this;
         let pre = `>>> ${that.startTime} -- ${that.formatTime()}\n`;
         let fileData = text || `本次总下载：${that.downloadCount}`;
-        let suf = `\n==========================\n`;
+        let suf = `\n--------------------------\n`;
         that.appendFile(`${config.logDist}record.text`, `${pre}${fileData}${suf}`, (err) => {
             if (err) {
                 console.log(err);
