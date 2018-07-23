@@ -19,6 +19,7 @@ console.log('开始获取');
 tools.startTime = tools.formatTime();
 let getRes = async function(queryVar, otherParam, errBack) {
     let src = requestUrl + tools.getVariables(queryVar);
+    console.log(src)
     if (typeof queryVar == 'string') {
         src = queryVar;
     }
