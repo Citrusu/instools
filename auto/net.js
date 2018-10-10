@@ -28,6 +28,7 @@ class Net {
                         errBack(err)
                     };
                 } else {
+                    // tools.log(JSON.stringify(res))
                     resolve(res.body);
                 }
             }

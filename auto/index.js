@@ -92,7 +92,13 @@ function downList(index) {
     }
     task.taskFuncs.push(async(errBack) => {
         task.taskCount -= 1;
-        getRes({ id: n.userid, first: config.pageNum }, { dir: dir, user: n.username }, errBack);
+        getRes({
+            id: n.userid,
+            first: config.pageNum
+        }, {
+            dir: dir,
+            user: n.username
+        }, errBack);
     })
 
 }
