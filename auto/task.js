@@ -45,7 +45,7 @@ class Task {
                 that.taskCount += 1;
                 //将当前方法抽出，如果失败则重新加入列队
                 nowTask((err) => {
-                    // tools.err(`reTask`)
+                    tools.err(`reTask`)
                     if (that.taskCount > 0) {
                         that.taskCount -= 1;
                     }

@@ -17,7 +17,7 @@ let downIdx = 0;
 
 console.log('开始获取');
 tools.startTime = tools.formatTime();
-let getRes = async function(queryVar, otherParam, errBack) {
+let getRes = async function (queryVar, otherParam, errBack) {
     let src = requestUrl + tools.getVariables(queryVar);
     console.log(src)
     if (typeof queryVar == 'string') {
@@ -34,7 +34,7 @@ let getRes = async function(queryVar, otherParam, errBack) {
         let shortCode = n.node.shortcode; // 文章短名，可拼上获得文章详情地址
         let imgRealUrl = n.node.display_url; // 图片地址
         let suffix = imgRealUrl.split('.').pop(); //文件后缀
-        let downSrc = otherParam.dir + shortCode + '.' + suffix;
+        let downSrc = otherParam.dir + shortCode + '.jpg';
 
         //console.log(`下载：${n.node.display_url}`);
         if (fs.existsSync(downSrc)) {
@@ -44,7 +44,7 @@ let getRes = async function(queryVar, otherParam, errBack) {
             break;
         }
 
-        let fileFunc = async(errBack) => {
+        let fileFunc = async (errBack) => {
             // console.log(`下载：${imgRealUrl}`);
             let file = await net.getByProxy(imgRealUrl, errBack);
             tools.saveFile(downSrc, file, () => {
@@ -59,7 +59,7 @@ let getRes = async function(queryVar, otherParam, errBack) {
 
     //是否有下一页
     if (!breakList && nextPage.has_next_page && nextPage.has_next_page != 'false') {
-        task.taskFuncs.push(async(errBack) => {
+        task.taskFuncs.push(async (errBack) => {
             task.taskCount -= 1;
             getRes({
                 id: queryVar.id,
@@ -90,15 +90,15 @@ function downList(index) {
         });
 
     }
-    task.taskFuncs.push(async(errBack) => {
+    task.taskFuncs.push(async (errBack) => {
         task.taskCount -= 1;
         getRes({
             id: n.userid,
             first: config.pageNum
         }, {
-            dir: dir,
-            user: n.username
-        }, errBack);
+                dir: dir,
+                user: n.username
+            }, errBack);
     })
 
 }
