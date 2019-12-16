@@ -1,6 +1,11 @@
 const config = require('./config');
 const fs = require('fs');
-const dist = config.dist; //输出目录
+let baseDist = config.dist; //输出目录
+if (!fs.existsSync(baseDist)) {
+    baseDist = './dist/';
+}
+const dist = baseDist;
+
 const collectList = config.collectList;
 const requestUrl = config.requestUrl;
 
@@ -96,9 +101,9 @@ function downList(index) {
             id: n.userid,
             first: config.pageNum
         }, {
-                dir: dir,
-                user: n.username
-            }, errBack);
+            dir: dir,
+            user: n.username
+        }, errBack);
     })
 
 }

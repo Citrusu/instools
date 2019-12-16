@@ -1,17 +1,17 @@
 //工具方法
 const fs = require('fs');
 const config = require('./config');
-const Tools = function() {
-    this.startTime = null;
-    this.downloadCount = 0;
-    this.errNum = 0;
-};
 
-Tools.prototype = {
+class Tools {
+    constructor() {
+        this.startTime = null;
+        this.downloadCount = 0;
+        this.errNum = 0;
+    }
     /**
      * 保存文件
      */
-    saveFile: function(dist, fileData, func) {
+    saveFile(dist, fileData, func) {
         let that = this;
         if (fs.existsSync(dist)) {
             console.log(`已存在: ${dist}`);
@@ -26,19 +26,19 @@ Tools.prototype = {
             console.log(`已保存文件: ${dist},当前下载:${that.downloadCount}`);
             if (func) { func() }
         });
-    },
+    }
     /**
      * 解析请求参数
      */
-    getVariables: function(param) {
+    getVariables(param) {
         return '&variables=' + JSON.stringify(param);
-    },
+    }
     //随机数
-    getRandom: function(a, b) {
+    getRandom(a, b) {
         return Math.round(Math.random() * (b - a) + a);
-    },
+    }
     //任务记录
-    record: function(text, func) {
+    record(text, func) {
         let that = this;
         let pre = `>>> ${that.startTime} -- ${that.formatTime()}\n`;
         let fileData = text || `本次总下载：${that.downloadCount}`;
@@ -54,13 +54,13 @@ Tools.prototype = {
             return;
         });
         console.log(fileData);
-    },
-    log: function(text) {
+    }
+    log(text) {
         this.appendFile(`${config.logDist}log.text`, `${text}\n`, (err) => {
             return;
         });
-    },
-    err: function(text) {
+    }
+    err(text) {
         let that = this;
         that.errNum += 1;
         let pre = `>>> 当前错误：${that.errNum} - ${that.formatTime()}\n`;
@@ -68,16 +68,16 @@ Tools.prototype = {
             return;
         });
         console.log(`已记录错误：${that.errNum}`);
-    },
+    }
     //文件内容写入追加
-    appendFile: function(dist, fileData, func) {
+    appendFile(dist, fileData, func) {
         fs.appendFile(dist, fileData, 'utf8', (err) => {
             if (err) {
                 console.log(err);
                 if (func) { func(err) };
             }
         })
-    },
+    }
     //格式化时间
     formatTime() {
         var nowTime = new Date();
