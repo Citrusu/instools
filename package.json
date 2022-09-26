@@ -18,6 +18,6 @@
   "homepage": "https://github.com/Citrusu/instools#readme",
   "dependencies": {
     "superagent": "^3.8.2",
-    "superagent-proxy": "^1.0.3"
+    "superagent-proxy": "^3.0.0"
   }
 }
